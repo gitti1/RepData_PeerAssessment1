@@ -33,7 +33,7 @@ medianSteps <- median(activityPerDay$steps, na.rm=TRUE)
 The mean total number of steps taken per day is `r meanSteps`, and the median is `r medianSteps`. 
 
 ## What is the average daily activity pattern?
-Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
+We generate a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis).
 
 ```{r dailyactivitypattern, cache=TRUE}
 #aggregate per interval and take the average over all days (ie the mean)

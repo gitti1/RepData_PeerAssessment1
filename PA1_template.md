@@ -48,7 +48,7 @@ medianSteps <- median(activityPerDay$steps, na.rm = TRUE)
 The mean total number of steps taken per day is 1.0766 &times; 10<sup>4</sup>, and the median is 10765. 
 
 ## What is the average daily activity pattern?
-Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
+We generate a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis).
 
 
 ```r

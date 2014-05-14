@@ -226,7 +226,7 @@ medianSteps &lt;- median(activityPerDay$steps, na.rm = TRUE)
 
 <h2>What is the average daily activity pattern?</h2>
 
-<p>Make a time series plot (i.e. type = &ldquo;l&rdquo;) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)</p>
+<p>We generate a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis).</p>
 
 <pre><code class="r"># aggregate per interval and take the average over all days (ie the mean)
 dailyactivity &lt;- tapply(activity$steps, activity$interval, mean, na.rm = TRUE)
