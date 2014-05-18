@@ -27,8 +27,9 @@ ggplot(activityPerDay, aes(x=date, y=steps)) + geom_bar(stat="identity", color="
 ```
 
 ```{r computeMeanSteps, cache=TRUE}
-meanSteps <- mean(activityPerDay$steps, na.rm=TRUE)
-medianSteps <- median(activityPerDay$steps, na.rm=TRUE)
+options("scipen"=100)
+meanSteps <- round(mean(activityPerDay$steps, na.rm=TRUE), digits=0)
+medianSteps <- round(median(activityPerDay$steps, na.rm=TRUE), digits=0)
 ```
 The mean total number of steps taken per day is `r meanSteps`, and the median is `r medianSteps`. 
 
@@ -59,6 +60,7 @@ There are `r missingvalues` missing values in the variable "steps". There are no
 
 We create a new dataset by filling the missing values with the mean across all 5-minute intervals. 
 ```{r fillNAs, cache=TRUE}
+m <- round(mean(activity$steps, na.rm=TRUE), digits=0)
 activityNew <- activity
 for (i in 1:nrow(activity)) {
     if(is.na(activity$steps[i])==TRUE){
@@ -66,9 +68,9 @@ for (i in 1:nrow(activity)) {
     }
 }
 summary(activityNew)
-sum(is.na(activityNew))
+#sum(is.na(activityNew)) # no NAs anymore
 ```
-
+We plot the dataset with filled values. 
 ```{r newHist, cache=TRUE}
 activityNew$date <- as.Date(activityNew$date)
 #aggregate by date and rename variables
@@ -83,17 +85,18 @@ ggplot(activityNewPerDay, aes(x=date, y=steps)) + geom_bar(stat = "identity",
 
 
 ```{r comparedata}
+options("scipen"=100)
 summary(activity)
 summary(activityNew)
-meanSteps <- mean(activity$steps, na.rm=TRUE)
-medianSteps <- median(activity$steps, na.rm=TRUE)
-meanStepsNew <- mean(activityNew$steps, na.rm=TRUE)
-medianStepsNew <- median(activityNew$steps, na.rm=TRUE) 
-totalSteps <- sum(activity$steps, na.rm=TRUE)
-totalStepsNew <- sum(activityNew$steps, na.rm=TRUE)
+meanSteps <- round(mean(activity$steps, na.rm=TRUE), digits=0)
+medianSteps <- round(median(activity$steps, na.rm=TRUE), digits=0)
+meanStepsNew <- round(mean(activityNew$steps, na.rm=TRUE), digits=0)
+medianStepsNew <- round(median(activityNew$steps, na.rm=TRUE), digits=0)
+totalSteps <- round(sum(activity$steps, na.rm=TRUE), digits=0)
+totalStepsNew <- round(sum(activityNew$steps, na.rm=TRUE), digits=0)
 diff <- totalStepsNew - totalSteps
 ```
-On this basis the mean and median steps per day stay the same: 
+On this basis the mean and median steps per day stay the same (all rounded to integers): 
 - original data: mean = `r meanSteps`, median = `r medianSteps` (while there is some increase in the 3rd quartile of the filled data)
 - interpolated data: mean = `r meanStepsNew`, median = `r medianStepsNew`
 
@@ -127,6 +130,6 @@ plot(weekendactivityavg, xlab="Interval", ylab="Activity", main="Activity on Wee
 
 ```
 Some observations:
-- activity rises earlier on weekdays, around interval 60
-- both on weekdays and weekends there is some sharp rise of activity around interval 100, 
-- while on weekdays there are lower activity peaks at later intervals. 
+- Activity rises earlier on weekdays, starting around interval 60.
+- Both on weekdays and weekends there is some sharp rise of activity around interval 100.
+- While on weekdays there are lower activity peaks at later intervals. 

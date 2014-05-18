@@ -41,11 +41,12 @@ ggplot(activityPerDay, aes(x = date, y = steps)) + geom_bar(stat = "identity",
 
 
 ```r
-meanSteps <- mean(activityPerDay$steps, na.rm = TRUE)
-medianSteps <- median(activityPerDay$steps, na.rm = TRUE)
+options(scipen = 100)
+meanSteps <- round(mean(activityPerDay$steps, na.rm = TRUE), digits = 0)
+medianSteps <- round(median(activityPerDay$steps, na.rm = TRUE), digits = 0)
 ```
 
-The mean total number of steps taken per day is 1.0766 &times; 10<sup>4</sup>, and the median is 10765. 
+The mean total number of steps taken per day is 1.0766 &times; 10<sup>4</sup>, and the median is 1.0765 &times; 10<sup>4</sup>. 
 
 ## What is the average daily activity pattern?
 We generate a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis).
@@ -84,6 +85,7 @@ There are 2304 missing values in the variable "steps". There are no missing valu
 We create a new dataset by filling the missing values with the mean across all 5-minute intervals. 
 
 ```r
+m <- round(mean(activity$steps, na.rm = TRUE), digits = 0)
 activityNew <- activity
 for (i in 1:nrow(activity)) {
     if (is.na(activity$steps[i]) == TRUE) {
@@ -104,14 +106,10 @@ summary(activityNew)
 ```
 
 ```r
-sum(is.na(activityNew))
+# sum(is.na(activityNew)) # no NAs anymore
 ```
 
-```
-## [1] 0
-```
-
-
+We plot the dataset with filled values. 
 
 ```r
 activityNew$date <- as.Date(activityNew$date)
@@ -132,6 +130,7 @@ ggplot(activityNewPerDay, aes(x = date, y = steps)) + geom_bar(stat = "identity"
 
 
 ```r
+options(scipen = 100)
 summary(activity)
 ```
 
@@ -161,20 +160,20 @@ summary(activityNew)
 ```
 
 ```r
-meanSteps <- mean(activity$steps, na.rm = TRUE)
-medianSteps <- median(activity$steps, na.rm = TRUE)
-meanStepsNew <- mean(activityNew$steps, na.rm = TRUE)
-medianStepsNew <- median(activityNew$steps, na.rm = TRUE)
-totalSteps <- sum(activity$steps, na.rm = TRUE)
-totalStepsNew <- sum(activityNew$steps, na.rm = TRUE)
+meanSteps <- round(mean(activity$steps, na.rm = TRUE), digits = 0)
+medianSteps <- round(median(activity$steps, na.rm = TRUE), digits = 0)
+meanStepsNew <- round(mean(activityNew$steps, na.rm = TRUE), digits = 0)
+medianStepsNew <- round(median(activityNew$steps, na.rm = TRUE), digits = 0)
+totalSteps <- round(sum(activity$steps, na.rm = TRUE), digits = 0)
+totalStepsNew <- round(sum(activityNew$steps, na.rm = TRUE), digits = 0)
 diff <- totalStepsNew - totalSteps
 ```
 
-On this basis the mean and median steps per day stay the same: 
-- original data: mean = 37.3826, median = 0 (while there is some increase in the 3rd quartile of the filled data)
-- interpolated data: mean = 37.3826, median = 0
+On this basis the mean and median steps per day stay the same (all rounded to integers): 
+- original data: mean = 37, median = 0 (while there is some increase in the 3rd quartile of the filled data)
+- interpolated data: mean = 37, median = 0
 
-Overall, the total number of steps is increased by 6.5674 &times; 10<sup>5</sup> - 570608 = 8.613 &times; 10<sup>4</sup>. 
+Overall, the total number of steps is increased by 656738 - 570608 = 86130. 
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -218,6 +217,6 @@ plot(weekendactivityavg, xlab = "Interval", ylab = "Activity", main = "Activity 
 ![plot of chunk panelplot](figure/panelplot.png) 
 
 Some observations:
-- activity rises earlier on weekdays, around interval 60
-- both on weekdays and weekends there is some sharp rise of activity around interval 100, 
-- while on weekdays there are lower activity peaks at later intervals. 
+- Activity rises earlier on weekdays, starting around interval 60.
+- Both on weekdays and weekends there is some sharp rise of activity around interval 100.
+- While on weekdays there are lower activity peaks at later intervals. 
