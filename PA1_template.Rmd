@@ -5,7 +5,7 @@ This analysis is based on data from a personal activity monitoring device, colle
 ## Loading and preprocessing the data
 We first load the data.
 ```{r results="hide"}
-activity <- read.csv("activity.csv")
+activity <- read.csv("/Users/bschmid1/datasciencecoursera/RepData_PeerAssessment1/activity.csv")
 ```
 
 ## What is mean total number of steps taken per day?
@@ -127,9 +127,13 @@ weekdayactivityavg <- tapply(weekdayactivity$steps, weekdayactivity$interval, me
 par(mfrow=c(2, 1)) #two figures, vertical
 plot(weekdayactivityavg, xlab="Interval", ylab="Activity", main="Activity on Weekdays", type="l")
 plot(weekendactivityavg, xlab="Interval", ylab="Activity", main="Activity on Weekends", type="l")
-
 ```
 Some observations:
-- Activity rises earlier on weekdays, starting around interval 60.
-- Both on weekdays and weekends there is some sharp rise of activity around interval 100.
-- While on weekdays there are lower activity peaks at later intervals. 
+- Activtity in terms of steps taken is wider spread and much higher on weekends than on weekdays.
+- Activity rises earlier on weekdays, starting around interval 60, i.e. from 5 o'clock in the morning.
+- Both on weekdays and weekends there is some sharp rise of activity around interval 100, i.e. around 8.30 o'clock.
+- On weekdays activity peaks are lower and less frequent at later intervals than at weekends. 
+
+```{r}
+100*5/60
+```

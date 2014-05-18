@@ -189,7 +189,7 @@ hljs.initHighlightingOnLoad();
 
 <p>We first load the data.</p>
 
-<pre><code class="r">activity &lt;- read.csv(&quot;activity.csv&quot;)
+<pre><code class="r">activity &lt;- read.csv(&quot;/Users/bschmid1/datasciencecoursera/RepData_PeerAssessment1/activity.csv&quot;)
 </code></pre>
 
 <h2>What is mean total number of steps taken per day?</h2>
@@ -374,10 +374,17 @@ plot(weekendactivityavg, xlab = &quot;Interval&quot;, ylab = &quot;Activity&quot
 <p>Some observations:</p>
 
 <ul>
-<li>Activity rises earlier on weekdays, starting around interval 60.</li>
-<li>Both on weekdays and weekends there is some sharp rise of activity around interval 100.</li>
-<li>While on weekdays there are lower activity peaks at later intervals. </li>
+<li>Activtity in terms of steps taken is wider spread and much higher on weekends than on weekdays.</li>
+<li>Activity rises earlier on weekdays, starting around interval 60, i.e. from 5 o&#39;clock in the morning.</li>
+<li>Both on weekdays and weekends there is some sharp rise of activity around interval 100, i.e. around 8.30 o&#39;clock.</li>
+<li>On weekdays activity peaks are lower and less frequent at later intervals than at weekends. </li>
 </ul>
+
+<pre><code class="r">100 * 5/60
+</code></pre>
+
+<pre><code>## [1] 8.333
+</code></pre>
 
 </body>
 

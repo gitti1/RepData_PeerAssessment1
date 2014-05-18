@@ -6,7 +6,7 @@ This analysis is based on data from a personal activity monitoring device, colle
 We first load the data.
 
 ```r
-activity <- read.csv("activity.csv")
+activity <- read.csv("/Users/bschmid1/datasciencecoursera/RepData_PeerAssessment1/activity.csv")
 ```
 
 
@@ -217,6 +217,17 @@ plot(weekendactivityavg, xlab = "Interval", ylab = "Activity", main = "Activity 
 ![plot of chunk panelplot](figure/panelplot.png) 
 
 Some observations:
-- Activity rises earlier on weekdays, starting around interval 60.
-- Both on weekdays and weekends there is some sharp rise of activity around interval 100.
-- While on weekdays there are lower activity peaks at later intervals. 
+- Activtity in terms of steps taken is wider spread and much higher on weekends than on weekdays.
+- Activity rises earlier on weekdays, starting around interval 60, i.e. from 5 o'clock in the morning.
+- Both on weekdays and weekends there is some sharp rise of activity around interval 100, i.e. around 8.30 o'clock.
+- On weekdays activity peaks are lower and less frequent at later intervals than at weekends. 
+
+
+```r
+100 * 5/60
+```
+
+```
+## [1] 8.333
+```
+
